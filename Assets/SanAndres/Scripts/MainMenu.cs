@@ -143,6 +143,9 @@ namespace SanAndres
             Cerrar();
         }
 
+        /// <summary>En el navegador (WebGL) Application.Quit no hace nada, así que se oculta "Salir".</summary>
+        static bool PuedeSalir => Application.platform != RuntimePlatform.WebGLPlayer;
+
         void Salir()
         {
             PlayerPrefs.Save();
@@ -199,7 +202,7 @@ namespace SanAndres
                     });
                     items.Add(new Item { texto = "Opciones", aceptar = () => { origen = Pantalla.Principal; Ir(Pantalla.Opciones); } });
                     items.Add(new Item { texto = "Controles", aceptar = () => { origen = Pantalla.Principal; Ir(Pantalla.Controles); } });
-                    items.Add(new Item { texto = "Salir", aceptar = Salir });
+                    if (PuedeSalir) items.Add(new Item { texto = "Salir", aceptar = Salir });
                     break;
 
                 case Pantalla.Pausa:
@@ -208,7 +211,7 @@ namespace SanAndres
                     items.Add(new Item { texto = "Opciones", aceptar = () => { origen = Pantalla.Pausa; Ir(Pantalla.Opciones); } });
                     items.Add(new Item { texto = "Controles", aceptar = () => { origen = Pantalla.Pausa; Ir(Pantalla.Controles); } });
                     items.Add(new Item { texto = "Menú principal", aceptar = AbrirPrincipal });
-                    items.Add(new Item { texto = "Salir del juego", aceptar = Salir });
+                    if (PuedeSalir) items.Add(new Item { texto = "Salir del juego", aceptar = Salir });
                     break;
 
                 case Pantalla.Opciones:

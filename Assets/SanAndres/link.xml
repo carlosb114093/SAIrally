@@ -1,0 +1,8 @@
+<!-- Evita que el build web quite clases de Unity que el juego crea por código
+     (GameObject.CreatePrimitive agrega un SphereCollider aunque luego se borre). -->
+<linker>
+  <assembly fullname="UnityEngine.PhysicsModule">
+    <type fullname="UnityEngine.SphereCollider" preserve="all"/>
+    <type fullname="UnityEngine.CapsuleCollider" preserve="all"/>
+  </assembly>
+</linker>
